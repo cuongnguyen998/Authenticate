@@ -26,11 +26,16 @@ namespace Basic
 
             services.AddAuthorization(config =>
             {
+
+                config.AddPolicy("Admin", policyBuilder =>
+                {
+                    policyBuilder.RequireClaim(ClaimTypes.Role, "Admin");
+                });
+
                 //Authorize base on Policy and ClaimType
                 config.AddPolicy("Claim.DOB", policyBuilder =>
                 {
                     policyBuilder.RequireClaim(ClaimTypes.DateOfBirth);
-                    //policyBuilder.RequireClaim(ClaimTypes.Role);
                 });
             });
 
